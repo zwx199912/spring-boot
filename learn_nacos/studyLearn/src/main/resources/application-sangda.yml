@@ -1,0 +1,59 @@
+server:
+  port: 8446
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+spring:
+  datasource:
+    username: root
+    password: sangda@123
+    url: jdbc:mysql://10.11.2.22:3306/sedwt-cloud?useUnicode=true&nullCatalogMeansCurrent=true&characterEncoding=utf8&&serverTimezone=Asia/Shanghai&allowMultiQueries=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari: #mysql连接池配置
+      minimum-idle: 5          #最小空闲连接数
+      maximum-pool-size: 10    #池中最大连接数
+      idle-timeout: 60000      #连接存活时间，60s
+      pool-name: HikariPool-1- #连接池的用户定义名称
+      auto-commit: true
+  activiti:
+      check-process-definitions: false
+      database-schema-update: true
+  application:
+    name: studyLearn-activit
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 101.34.17.206:8848
+        namespace: public
+
+#------------------rocketmq-------------------
+rocketmq:
+  name-server: 101.34.17.206:9876
+  producer:
+    group: learn-first-grouup
+
+mq:
+  group:
+    test: test
+  topic:
+    test: test
+
+mybatis:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    #log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  #type-aliases-package: com.sedwt
+
+
+#----------------------需求临期提醒 -----------------------------
+demand:
+  time:
+    cron: 0 0 1 * * ?
+    AdoptAdvent: 30,15,3     #采纳临期时间预警(30天,15天,3天......) 支持多天配置 需要为正数
+    SuspendAdvent: 30,15,3    #拒绝临期时间预警(30天,15天,3天......) 支持多天配置 需要为正数
+
+

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/commonUtill/commonUtill.iml" filepath="$PROJECT_DIR$/commonUtill/commonUtill.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gateWay/gateWay.iml" filepath="$PROJECT_DIR$/gateWay/gateWay.iml" />
+      <module fileurl="file://$PROJECT_DIR$/nacosLearn.iml" filepath="$PROJECT_DIR$/nacosLearn.iml" />
+      <module fileurl="file://$PROJECT_DIR$/studyLearn/studyLearn.iml" filepath="$PROJECT_DIR$/studyLearn/studyLearn.iml" />
+      <module fileurl="file://$PROJECT_DIR$/workFlow/workFlow.iml" filepath="$PROJECT_DIR$/workFlow/workFlow.iml" />
+    </modules>
+  </component>
+</project>

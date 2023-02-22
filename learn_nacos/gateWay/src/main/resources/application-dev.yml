@@ -1,0 +1,55 @@
+Spring:
+  application:
+    name: gateway
+  cloud:
+    sentinel:
+      transport:
+        port: 8719
+        dashboard: 101.34.17.206:8858
+      datasource:
+        #        dsl.file:     #通过本地文件方式。基于服务级别的配置
+        #            file: classpath:gw-flow.json
+        #            ruleType: gw-flow
+        #        ds2.file:	    #通过本地文件方式。细粒度对指定api进行配置
+        #            file: classpath:gw-api-group.json
+        #            ruleType: gw-api-group
+        ds1:
+          nacos:            #通过nacos实现动态配置
+            server-addr: 101.34.17.206:8848
+            data-id: test
+            group-id: test
+            data-type: json
+            rule-type: flow  #gw-flow网关流控规则。用于定义服务或者自定义api组 的具体流控规则
+    nacos:
+      discovery:
+        server-addr: 101.34.17.206:8848
+
+    gateway:
+      #路由配置 [路由 就是指定当请求满足什么条件的时候转到哪个微服务]
+      routes:
+        - id: studyLearn #路由的唯一标识，路由到order
+          uri: lb://studyLearn-activit #需要转发的地址，lb指的是从nacos中按照名称获取微服务,并遵循负载均衡策略
+          #断言规则，就是路由转发要满足的条件
+          predicates:
+            - Path=/studyLearn/** #当请求路径满足Path指定的规则时,才进行路由转发
+            # 当客户端访问http://localhost:8070/order-ser/order/add 会路由到↓
+            #  http://localhost:8081/order-ser/order/add，这个无法访问，需要filters过滤下
+          filters: #过滤器,请求在传递过程中可以通过过滤器对其进行一定的修改
+            - StripPrefix=1 # 转发之前去掉第一层路由
+  redis:
+    database: 1
+    host: 101.34.17.206
+    port: 6379
+    password: 123456
+    lettuce:
+      pool:
+        max-wait: 3000
+        min-idle: 8
+        max-idle: 16
+        max-active: 16
+  main:
+    allow-bean-definition-overriding: true
+
+
+
+

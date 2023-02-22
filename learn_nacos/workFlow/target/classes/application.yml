@@ -1,0 +1,18 @@
+server:
+  port: 8077
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+spring:
+  application:
+    name: workFlow-8077
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 101.34.17.206:8848
+        namespace: public
+  profiles:
+    active: dev
